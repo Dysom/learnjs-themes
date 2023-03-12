@@ -1,0 +1,35 @@
+<!doctype html>
+<script src="https://ru.js.cx/test/libs.js"></script>
+<script src="test.js"></script>
+<script>
+
+    async function getUsers(names) {
+        const resultObjs = [];
+
+        for (let userName of names) {
+            let result;
+
+            try {
+                result = await fetch('https://api.github.com/users/' + userName);
+            }
+            catch {
+                result = null;
+            }
+
+            if (result && result.status === 200) {
+                let parsed = await result.json();
+
+                resultObjs.push(parsed);
+            }
+            else {
+                resultObjs.push(null);
+            }
+        }
+
+        return resultObjs
+
+    }
+
+</script>
+
+</html>
